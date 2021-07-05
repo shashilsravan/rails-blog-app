@@ -1,0 +1,61 @@
+<% provide(:title, 'Profile page') %>
+<div class="mb-5 row">
+  <div class="col-lg-4">
+    <%= image_tag(@user.image, :class => "img-thumbnail custom-image") %>
+    <h5>
+      <strong>Name:</strong> 
+      <%= @user.name %>
+    </h5>
+
+    <h5>
+      <strong>Email:</strong>
+      <%= @user.email %>
+    </h5>
+
+    <h5>
+      <strong>Phone:</strong>
+      <%= @user.phone %>
+    </h5>
+
+    <h6 class="text-muted my-3">
+      <strong>User from:</strong>
+      <%= @user.created_at %>
+    </h6>
+    
+    <div>
+        <%= link_to 'Edit', edit_user_path(@user) %> |
+        <%= link_to 'Back', users_path %>
+    </div>
+
+    <h6 class="text-primary my-3">
+      Member since : <%= (Time.now.to_date - @user.created_at.to_date).to_i %> days
+    </h6>
+
+  </div>
+
+  <div class="col-lg-8">
+    <h5 class="text-center fw-bold text-success"> Tweets by <%= @user.name%> </h5>
+    <% @user.microposts.each do |each_post| %>
+      <div class="card my-4">
+        <div class="card-body">
+            <h5 class="card-title"> Tweet #<%= each_post.id %> </h5>
+            <h6 class="card-subtitle mb-2 text-muted">
+              Tweeted at <%= each_post.created_at %>
+            </h6>
+            <p class="card-text">
+              <%= each_post.content %>
+            </p>
+
+            <%= link_to ' Edit', edit_micropost_path(each_post),
+            data: { confirm: 'Are you sure?' },
+            :class => "card-link far fa-edit btn btn-warning" %>
+
+            <%= link_to ' Delete', each_post, 
+            method: :delete,
+            data: { confirm: 'Are you sure to delete'},
+            :class => "card-link far fa-trash-alt btn btn-danger" %>
+        </div>
+      </div>
+    <% end %>
+  <div>
+</div>

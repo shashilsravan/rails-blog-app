@@ -1,0 +1,10 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+.custom-image{
+    border-radius: 50%;
+    height: 240px;
+    width: 240px;
+    margin-bottom: 32px;
+    box-shadow: 2px 8px 14px rgba($color: #000000, $alpha: 0.2);
+}

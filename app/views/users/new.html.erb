@@ -1,0 +1,11 @@
+<% provide(:title, 'Signup page') %>
+<div class="my-5 py-5 d-flex flex-column justify-content-center 
+    align-items-center bg-light">
+    <h1>Sign up</h1>
+
+    <%= render 'signup', user: @user %>
+ 
+    <hr>
+    <%= link_to 'Back', users_path %>
+
+</div>

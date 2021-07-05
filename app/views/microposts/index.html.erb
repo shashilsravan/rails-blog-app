@@ -1,0 +1,28 @@
+<h1>Microposts</h1>
+
+<table class="table table-striped table-responsive-sm">
+  <thead>
+    <tr>
+      <th scrope="col">Content</th>
+      <th scrope="col">User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @microposts.each do |micropost| %>
+      <tr>
+        <td><%= micropost.content %></td>
+        <td><%= micropost.user_id %></td>
+        <td><%= link_to 'Show', micropost, :class => "btn btn-sm btn-success font-white" %></td>
+        <td><%= link_to 'Edit', edit_micropost_path(micropost), :class => "btn btn-sm btn-dark font-white" %></td>
+        <td><%= link_to 'Destroy', micropost, method: :delete, data: { confirm: 'Are you sure?' } ,
+        :class => "btn btn-sm btn-danger font-white" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Micropost', new_micropost_path %>

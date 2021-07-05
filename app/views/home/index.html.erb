@@ -1,0 +1,37 @@
+<% provide(:title, 'Home page') %>
+<div class="my-3">
+
+    <h3>
+        Welcome to Switter
+    </h3>
+    <br>
+
+    <% @microposts.each do |micropost| %>
+        <div class="card my-3">
+            <div class="card-body">
+                <div class="d-flex align-items-center mb-4">
+                    <%= image_tag(get_image_url(micropost.user_id), 
+                        class: "rounded-circle", size: '50') %>
+                    <h5 class="card-title ms-2">
+                        Tweet by
+                        <%= link_to "##{get_name(micropost.user_id)}",
+                            get_path(micropost.user_id)  %>
+                    </h5>
+                </div>
+                <h5 class="card-text">
+                    <%= micropost.content %>
+                </h5>
+                <p class="text-muted"> Tweeted at: <%= micropost.created_at %> </p>
+                <div class="d-flex">
+                    <a href="#" class="btn btn-primary mx-1">
+                        Edit
+                    </a>
+                    <a href="#" class="btn btn-danger mx-1">
+                        Destroy
+                    </a>
+                </div>
+            </div>
+        </div>
+    <% end %>
+
+</div>
