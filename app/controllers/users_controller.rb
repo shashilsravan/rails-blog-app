@@ -4,6 +4,9 @@ class UsersController < ApplicationController
   before_action :correct_user, only: %i[ edit update destroy ]
   before_action :logged_out_user, only: [:new]
 
+  def all
+    @users = User.all()
+  end
   # GET /users or /users.json
   def index
     @users = User.paginate(page: params[:page])

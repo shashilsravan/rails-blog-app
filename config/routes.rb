@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get '/search', to: 'search_page#search'
+  get '/search', :to => 'searchpage#search'
   get 'sessions/new'
   root 'home#index'
   get '/about', to: 'home#about'
@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
+  get '/users/all', to: 'users#all'
   resources :microposts
   resources :users
   resources :account_activations, only: [:edit]

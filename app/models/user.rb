@@ -21,6 +21,14 @@ class User < ApplicationRecord
         SecureRandom.urlsafe_base64
     end
 
+    def self.search(value)
+        if value
+            User.where("lower(name) LIKE :search", search: "%#{value}%")
+        else
+            User.all
+        end
+    end
+
     def remember
         self.remember_token = User.new_token
         update_attribute(:remember_digest, User.digest(remember_token))

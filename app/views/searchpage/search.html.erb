@@ -1,0 +1,27 @@
+<%= form_tag(search_path, :method => "get",   
+    class: 'navbar-form navbar-left') do %>  
+    <div class="input-group">  
+        <%= search_field_tag :search, params[:search], 
+        placeholder: "Search", class: "form-control search_users" %>  
+        <div class="input-group-btn">  
+            <%= button_tag "Go!", :class => 'btn btn-info',:name => nil%>  
+        </div>  
+  </div> 
+<% end %>
+
+<h3 class="my-3">Search Result</h3>  
+<% @results.each do |result| %>  
+    <%= result.name %><br>  
+<% end %>
+
+ <script type="text/javascript">
+    $(".search_users").keyup(function() {
+        $.ajax({
+            url: '/search', 
+            data: {search: $(this).val()},
+            success: function(res) {
+                console.log(res);
+            }
+        });
+    });
+</script>

@@ -23,9 +23,9 @@
                 </h5>
                 <p class="text-muted"> Tweeted at: <%= micropost.created_at %> </p>
                 <div class="d-flex">
-                    <a href="#" class="btn btn-primary mx-1">
-                        Edit
-                    </a>
+                    <%= link_to "Edit", edit_micropost_path(micropost.id), :class => "btn btn-primary mx-1"%>
+                    <%= link_to "Destroy", micropost, method: :delete, data: { confirm: 'Are you sure?' } ,
+                        :class => "btn btn-sm btn-danger font-white" %>
                     <a href="#" class="btn btn-danger mx-1">
                         Destroy
                     </a>
