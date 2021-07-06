@@ -1,1 +1,29 @@
-<%= debug(results) %>
+<% @results.each do |result| %>
+    <div class="card mb-3">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <%= image_tag(result.image, class: "card-img-top") %>
+            </div>
+            <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">
+                    Name: <%= result.name %>
+                </h5>
+                <p class="card-text">
+                    Email: <%= result.email %>
+                </p>
+                <p class="card-text">
+                    No.of tweets: <%= result.microposts.count %>
+                </p>
+                <p class="card-text">
+                Member since: 
+                <small class="text-muted">
+                    <%= result.created_at.to_date %>
+                </small></p>
+                
+                <%= link_to 'Show user', result, class: "btn btn-light" %>
+            </div>
+            </div>
+        </div>
+    </div>
+<% end %>
