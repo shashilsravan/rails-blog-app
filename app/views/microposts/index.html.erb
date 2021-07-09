@@ -3,6 +3,7 @@
 <table class="table table-striped table-responsive-sm">
   <thead>
     <tr>
+      <th scrope="col">Title</th>
       <th scrope="col">Content</th>
       <th scrope="col">User</th>
       <th colspan="3"></th>
@@ -12,7 +13,8 @@
   <tbody>
     <% @microposts.each do |micropost| %>
       <tr>
-        <td><%= micropost.content %></td>
+        <td><%= micropost.title %></td>
+        <td><%= micropost.content.truncate(20) %></td>
         <td><%= micropost.user_id %></td>
         <td><%= link_to 'Show', micropost, :class => "btn btn-sm btn-success font-white" %></td>
         <td><%= link_to 'Edit', edit_micropost_path(micropost), :class => "btn btn-sm btn-dark font-white" %></td>

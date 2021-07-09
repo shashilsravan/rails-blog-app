@@ -1,0 +1,32 @@
+<% provide(:title, @title) %>
+<div class="row">
+    <aside class="col-md-4">
+        <section class="user_info">
+            <h1><%= @user.name %></h1>
+            <div class="my-2"><%= link_to "view profile", @user, class: "btn btn-warning" %></div>
+            <div class="my-3">
+                <b>Tweets:</b> <%= @user.microposts.count %>
+            </div>
+        </section>
+        <section class="stats py-2">
+        <%= render 'shared/stats' %>
+        <% if @users.any? %>
+            <h5 class="mt-4">Followers: </h5>
+            <div class="user_avatars">
+                <% @users.each do |user| %>
+                    <%= link_to user.name, user %>
+                <% end %>
+            </div>
+        <% end %>
+        </section>
+    </aside>
+    <div class="col-md-8">
+        <h3><%= @title %></h3>
+        <% if @users.any? %>
+            <ul class="users follow">
+                <%= render @users %>
+            </ul>
+            <%= will_paginate %>
+        <% end %>
+    </div>
+</div>

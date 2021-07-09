@@ -1,9 +1,16 @@
 class User < ApplicationRecord
     attr_accessor :remember_token, :activation_token, :reset_token
-    
+    has_many :microposts, dependent: :destroy
+
+    has_many :active_relationships, class_name: "Relationship", 
+        foreign_key: "follower_id", dependent: :destroy
+    has_many :following, through: :active_relationships, source: :followed
+    has_many :passive_relationships, class_name: "Relationship",
+        foreign_key: "followed_id", dependent: :destroy
+    has_many :follower, through: :passive_relationships, source: :follower
+
     before_save {email.downcase!}
     before_create :create_activation_digest
-    has_many :microposts, dependent: :destroy
     validates :name, presence: true, length: {minimum: 4 ,maximum:20}
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i 
     validates :email, presence: true, format: 
@@ -70,5 +77,17 @@ class User < ApplicationRecord
 
     def password_reset_expired?
         reset_sent_at < 2.hours.ago
+    end
+
+    def follow(other_user)
+        following << other_user
+    end
+
+    def unfollow(other_user)
+        following.delete(other_user)
+    end
+
+    def following?(other_user)
+        following.include?(other_user)
     end
 end

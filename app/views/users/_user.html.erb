@@ -1,15 +1,26 @@
-<tr>
-    <th scope="row"><%= user.id %></th>
-    <td><h6><%= user.name %></h6></td>
-    <td><h6><%= user.email %></h6></td>
-    <td>
-        <%= image_tag(user.image, size: '50') %>
-    </td>
-    <td><h6><%= user.phone %></h6></td>
-    <td><%= link_to 'Show', user, :class => "btn btn-sm btn-success font-white" %></td>
-    <% if current_user.admin? || current_user?(user) %>
-        <td><%= link_to 'Edit', edit_user_path(user), :class => "btn btn-sm btn-primary font-white" %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, 
-        data: { confirm: 'Are you sure?' }, :class => "btn btn-sm btn-danger font-white" %></td>
-    <% end %>
-</tr>
+<div class="card mx-5 mb-3">
+  <div class="row g-0">
+    <div class="col-md-3">
+        <%= image_tag(user.image, class: "img-fluid rounded-start") %>
+    </div>
+    <div class="col-md-9">
+      <div class="card-body">
+        <h5>
+            <%= link_to user.name, user, class: "card-title" %>
+        </h5>
+        <p class="card-text">
+            Email: <%= user.email %>
+        </p>
+        <p class="card-text">
+            Followers: <%= user.follower.count %>
+        </p>
+        <p class="card-text">
+            Following: <%= user.following.count %>
+        </p>
+        <p class="card-text">
+            No.of tweets: <%= user.microposts.count %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

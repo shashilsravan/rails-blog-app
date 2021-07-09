@@ -4,22 +4,6 @@
   <%= link_to "Users with datatable", users_all_path %>
 </div>
 <%= will_paginate :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
-<table class="table table-striped table-responsive-sm">
-  <thead>
-    <tr>
-      <th scrope="col"> Id </th>
-      <th scope="col">Name</th>
-      <th scope="col">Email</th>
-      <th scope="col">Image</th>
-      <th scope="col">Phone</th>
-      <th colspan="3" class="text-center">Options</th>
-    </tr>
-  </thead>
-  <tbody>
-    <%= render @users %>
-  </tbody>
-</table>
-
-
+<%= render @users %>
 <br>
 <%= will_paginate :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>

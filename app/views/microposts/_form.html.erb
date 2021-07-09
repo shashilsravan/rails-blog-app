@@ -1,8 +1,8 @@
+
 <%= form_with(model: micropost) do |form| %>
   <% if micropost.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(micropost.errors.count, "error") %> prohibited this micropost from being saved:</h2>
-
       <ul>
         <% micropost.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -12,16 +12,33 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :content %>
-    <%= form.text_area :content %>
+    <%= form.label :title, class: "form-label" %>
+    <%= form.text_field :title, class: "form-control" %>
   </div>
 
   <div class="field">
-    <%= form.label :user_id %>
-    <%= form.number_field :user_id %>
+    <%= form.label :content, class: "form-label" %>
+    <%= form.text_area :content, class: "form-control", 
+      rows: "5", maxlength: "255" %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <span class="image">
+    <%= form.file_field :image, 
+    accept: "image/jpeg,image/gif,image/png",
+    class: "form-control mt-4" %>
+  </span>
+
+  <div class="actions my-4">
+    <%= form.submit "Submit", class: "btn btn-info" %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+  $("#micropost-image").bind("change", function(){
+      const size_in_megabytes = this.files[0].size/1024/1024;
+      if (size_in_megabytes > 5) {
+        alert("Maximum file size is 5MB. Please choose a smaller file.");
+          $("#micropost_image").val("");
+      }
+  })
+</script>

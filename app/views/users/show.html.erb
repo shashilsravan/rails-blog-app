@@ -6,6 +6,10 @@
       <strong>Name:</strong> 
       <%= @user.name %>
     </h5>
+    <%= render 'follow_form' if logged_in? %>
+    <div class="my-3">
+      <%= render 'shared/stats' %>
+    </div>
 
     <h5>
       <strong>Email:</strong>
@@ -19,7 +23,7 @@
 
     <h6 class="text-muted my-3">
       <strong>User from:</strong>
-      <%= @user.created_at %>
+      <%= time_ago_in_words(@user.created_at) %>
     </h6>
     
     <div>

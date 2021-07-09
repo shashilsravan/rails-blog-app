@@ -5,6 +5,12 @@
         Welcome to Switter
     </h3>
     <br>
+    <% if logged_in? %>
+    <div class="mb-4">
+            <%= link_to 'Create new micropost', new_micropost_path, class: "btn btn-outline-success" %>
+    </div>
+    
+    <%= will_paginate @microposts, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
 
     <% @microposts.each do |micropost| %>
         <div class="card my-3">
@@ -18,20 +24,22 @@
                             get_path(micropost.user_id)  %>
                     </h5>
                 </div>
-                <h5 class="card-text">
+                <%= image_tag micropost.display_image if micropost.image.attached? %>
+                <h5 class="card-text mt-3">
                     <%= micropost.content %>
                 </h5>
-                <p class="text-muted"> Tweeted at: <%= micropost.created_at %> </p>
+                <p class="text-muted"> Tweeted at: <%= time_ago_in_words(micropost.created_at) %> </p>
                 <div class="d-flex">
+                    <% if (logged_in? && current_user.admin?) || current_user?(micropost.user) %>
                     <%= link_to "Edit", edit_micropost_path(micropost.id), :class => "btn btn-primary mx-1"%>
                     <%= link_to "Destroy", micropost, method: :delete, data: { confirm: 'Are you sure?' } ,
-                        :class => "btn btn-sm btn-danger font-white" %>
-                    <a href="#" class="btn btn-danger mx-1">
-                        Destroy
-                    </a>
+                        :class => "btn btn-danger font-white" %>
+                    <% end %>
                 </div>
             </div>
         </div>
     <% end %>
 
+    <%= will_paginate @microposts, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
+    <% end %>
 </div>
